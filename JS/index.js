@@ -1,31 +1,15 @@
 
 function main(){
     var mymap = L.map('mapid').setView([9.948539942335483, -444.04008294120575], 15);
-    var busIcon = L.icon({
-        iconUrl: 'RES/bus.png',
-        //shadowUrl: 'RES/bus.png',
-    
-        iconSize:     [50, 60], // size of the icon
-        //shadowSize:   [50, 64], // size of the shadow
-        iconAnchor:   [22, 44], // point of the icon which will correspond to marker's location
-        //shadowAnchor: [4, 62],  // the same for the shadow
-        popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
-    });
     const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-    const maxzoom = 19;
+    const maxzoom = 35;
     L.tileLayer(url,{attribution,maxzoom}).addTo(mymap);
 
     let result = getPoints();
 
     result.then(result => putPointsOnMap(result,mymap));
     result.then(result => createWayPoints(result,mymap));
-
-    /*mymap.on('click', function(e) {
-        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-    });*/
-
-
 }
 
 async function getPoints(){
@@ -37,23 +21,15 @@ function putPointsOnMap(result,mymap){
 
     result.forEach(obj => {
         var busIcon = L.icon({
-            iconUrl: 'RES/bus2.png',
-            //shadowUrl: 'RES/bus.png',
-        
+            iconUrl: 'RES/ic_another_bus_station.png',
             iconSize:     [50, 50], // size of the icon
-            //shadowSize:   [50, 64], // size of the shadow
             iconAnchor:   [22, 44], // point of the icon which will correspond to marker's location
-            //shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
         });
         var busIconSE = L.icon({
-            iconUrl: 'RES/busSE2.png',
-            //shadowUrl: 'RES/bus.png',
-        
+            iconUrl: 'RES/ic_start_end_bus_station.png',
             iconSize:     [50, 50], // size of the icon
-            //shadowSize:   [50, 64], // size of the shadow
             iconAnchor:   [22, 44], // point of the icon which will correspond to marker's location
-            //shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
         });
         if(obj.id != 0 && obj.id !=result.length+1){
@@ -78,7 +54,6 @@ function createWayPoints(result,mymap){
     result.forEach(obj => {
         waypointsa.push(obj.geometry.coordinates);
     })
-
     let code = "";
     let head = "L.Routing.control({createMarker: function() { return null; }, waypoints: ["
     let body = "L.latLng("+waypointsa[0]+")"
@@ -87,8 +62,5 @@ function createWayPoints(result,mymap){
         body = body+ ",L.latLng("+waypointsa[j]+")"
     }
     code = head+body+tail
-    //console.log(code);
     eval(code)
-
-    //L.Routing.control({waypoints: [L.latLng(9.957874253375486, -83.9920281382569),L.latLng(9.961505627231706, -83.99489229532189),L.latLng(9.960185117901263, -83.99782107514865)]}).addTo(mymap);
 }
