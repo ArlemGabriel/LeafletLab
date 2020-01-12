@@ -103,22 +103,7 @@
             },
             "geometry": {
                 "type": "Point",
-                "coordinates": [9.953906305036266, -84.0132176536137]
-            }
-        },
-        {
-            "id":7,
-            "type": "Feature",
-            "properties": {
-                "name": "Parada #7: El Carmen - San José",
-                "amenity": "Estación de Bus",
-                "sense":"El Carmen - San José",
-                "description": "Prusia, San José, Goicoechea",
-                "stopnumber": "Parada #7: El Carmen"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [9.953906305036266, -84.0132176536137]
+                "coordinates": [ 9.953935155562943, -84.01300370693208]
             }
         },
         {
@@ -205,21 +190,6 @@
                 "sense":"El Carmen - San José",
                 "description": "Americas 1, San José, Goicoechea",
                 "stopnumber": "Parada #13: El Carmen"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [9.95115519934483, -84.0239514999069]
-            }
-        },
-        {
-            "id":14,
-            "type": "Feature",
-            "properties": {
-                "name": "Parada #14: El Carmen - San José",
-                "amenity": "Estación de Bus",
-                "sense":"El Carmen - San José",
-                "description": "Americas 1, San José, Goicoechea",
-                "stopnumber": "Parada #14: El Carmen"
             },
             "geometry": {
                 "type": "Point",
