@@ -1,4 +1,5 @@
 
+// Main function that creates the map and calls other functions
 function main(){
     var mymap = L.map('mapid').setView([9.948539942335483, -444.04008294120575], 15);
     const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -11,26 +12,27 @@ function main(){
     result.then(result => putPointsOnMap(result,mymap));
     result.then(result => createWayPoints(result,mymap));
 }
-
+// Function that obtains data from JSON (promises)
 async function getPoints(){
     let response = await fetch("./RES/points.json");
     let data = await response.json();
     return data;
 }
+// Function that creates markers with icons based on the data obtained from the JSON file
 function putPointsOnMap(result,mymap){
 
     result.forEach(obj => {
         var busIcon = L.icon({
             iconUrl: 'RES/ic_another_bus_station.png',
-            iconSize:     [50, 50], // size of the icon
-            iconAnchor:   [22, 44], // point of the icon which will correspond to marker's location
-            popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
+            iconSize:     [50, 50], 
+            iconAnchor:   [22, 44], 
+            popupAnchor:  [-3, -50] 
         });
         var busIconSE = L.icon({
             iconUrl: 'RES/ic_start_end_bus_station.png',
-            iconSize:     [50, 50], // size of the icon
-            iconAnchor:   [22, 44], // point of the icon which will correspond to marker's location
-            popupAnchor:  [-3, -50] // point from which the popup should open relative to the iconAnchor
+            iconSize:     [50, 50], 
+            iconAnchor:   [22, 44], 
+            popupAnchor:  [-3, -50] 
         });
         if(obj.id != 0 && obj.id !=result.length+1){
             var marker = L.marker(obj.geometry.coordinates,{icon:busIcon}).addTo(mymap);
@@ -49,6 +51,7 @@ function putPointsOnMap(result,mymap){
     })
     
 }
+// Function that draws the route between all the points
 function createWayPoints(result,mymap){
     let waypointsa = [];
     result.forEach(obj => {
